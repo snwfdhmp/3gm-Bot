@@ -31,31 +31,31 @@ def connect()
 	puts "Connected"
 	return agent
 	end
-			agent = connect
-			x=100
-			y=100
-			agent.get("http://www.3gm.fr/game/map.php?x=#{x}&y=#{y}")
-			map = agent.page.search("#map_table")
-			map.at(".map_td").each do |cell|
-				if cell.at(".actions_map") != nil
-					if cell.at(".actions_map").at("a") != nil
-					link = cell.at(".actions_map").at("a")["href"]
-					link = link.gsub('mission.php?x', "")
-					link = link.gsub('&y', "")
-					link = link.gsub('&m')
-					link = link.split("=")
-					x = link[0]
-					y = link[1]
-					pseudo = cell.at(".infos_map")[1].text
-					type = cell[2][0]["class"]
-					if type=="map_city"
-						type="BASE"
-					end
-					if type=="map_city_poste"
-						type="PA"
-					end
-					print "[#{x};#{y}] #{pseudo} (#{type})"
-				end
-				end
+	agent = connect
+	x=100
+	y=100
+	agent.get("http://www.3gm.fr/game/map.php?x=#{x}&y=#{y}")
+	map = agent.page.search("#map_table")
+	map.at(".map_td").each do |cell|
+		if cell.at(".actions_map") != nil #in `at': can't convert String into Integer 
+			if cell.at(".actions_map").at("a") != nil
+			link = cell.at(".actions_map").at("a")["href"]
+			link = link.gsub('mission.php?x', "")
+			link = link.gsub('&y', "")
+			link = link.gsub('&m')
+			link = link.split("=")
+			x = link[0]
+			y = link[1]
+			pseudo = cell.at(".infos_map")[1].text
+			type = cell[2][0]["class"]
+			if type=="map_city"
+				type="BASE"
 			end
+			if type=="map_city_poste"
+				type="PA"
+			end
+			print "[#{x};#{y}] #{pseudo} (#{type})"
+		end
+		end
+	end
 				
