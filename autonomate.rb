@@ -8,7 +8,7 @@ require 'open-uri'
 def connect()
 	agent=Mechanize.new
 	puts "Mechanize opened"
-	agent.set_proxy '213.186.33.24', 80
+	agent.set_proxy('213.174.124.185', 3128)
 	puts "Proxy setted" 
 	file = File.open("../../dev/projets/3gmbot/ids.txt", "r")
 	ids = file.read
@@ -22,9 +22,8 @@ def connect()
 	puts "Safari opened"
 	agent.get("http://www.3gm.fr/")
 	puts "On 3GM ..."
-	agent.page.save! "/home/martin/index.html"
-	agent.page.forms[0]["email"]= pseudo
-	agent.page.forms[0]["pass"]= mdp
+	agent.page.forms[0]["email"]= "" #TODO set
+	agent.page.forms[0]["pass"]= "" #TODO set
 	agent.page.forms[0]["serveur"]= 2
 	agent.page.forms[0]["connexion"]= "1"
 

@@ -8,7 +8,7 @@ def connect()
 	puts "Mechanize opened"
 	#agent.set_proxy '213.186.33.24', 80
 	#puts "Proxy setted" 
-	file = File.open("../../dev/projets/3gmbot/ids.txt", "r")
+	file = File.open("ids.txt", "r")
 	ids = file.read
 	ids = ids.gsub("\n","")
 	ids = ids.gsub(" ","")
@@ -20,7 +20,6 @@ def connect()
 	puts "Safari opened"
 	agent.get("http://www.3gm.fr/")
 	puts "On 3GM ..."
-	agent.page.save! "/home/martin/index.html"
 	agent.page.forms[0]["email"]= pseudo
 	agent.page.forms[0]["pass"]= mdp
 	agent.page.forms[0]["serveur"]= 2
