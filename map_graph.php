@@ -1,74 +1,1 @@
-<html>
-<head>
-	<title>Graph</title>
-	<style type='text/css'>
-	#preload-01 { background: url(img/BASE.png) no-repeat -9999px -9999px; }
-	#preload-02 { background: url(img/VIDE.png) no-repeat -9999px -9999px; }
-	#preload-03 { background: url(img/PA.png) no-repeat -9999px -9999px; }
-		.vide {
-			/*background-image: url(img/VIDE.png);*/
-			background-color: black;
-		}
-		.base {
-			/*background-image: url(img/BASE.png);*/
-			background-color: white: ;
-		}
-		div {
-			width: 3px;
-			height: 3px;
-			display: inline-block;
-		}
-	</style>
-</head>
-<body>
-<?php
-$handle=@fopen("coographfile.txt", "r"); //lecture du fichier
-$i = 0;
-if($handle) { //si le fichier existe
-	while(($buffer=fgets($handle)) != false) { //lecture fichier ligne par ligne
-		list($pseudo[$i], $x[$i], $y[$i]) = split("#", $buffer);
-		$i++;
-	}
-	$bases_fichier = $i;
-}
-else {
-	echo "Erreur lors de l'ouverture du fichier";
-}
-//GRAPH
-$xi = 100;
-$yi = 100;
-$bases_graph = 0;
-$vide_graph = 0;
-$fin = 0;	
-while ($fin == 0) {
-	if (array_search($xi, $x) == array_search($yi, $y) && array_search($xi, $x)) {
-		echo "<div class='base' id='x".$xi."y".$yi."'></div>";
-		$bases_graph++;
-	}
-	else {
-		echo "<div class='vide' id='x".$xi."y".$yi."'></div>";
-		$vide_graph++;
-	}
-	$xi++;
-	if ($xi >300) {
-		echo "<br>";
-		$xi = 100;
-		$yi++;
-	}
-	if ($yi > 300) {
-		$fin = 1;
-	}
-}
-if ($bases_graph == $bases_fichier) {
-	echo "0.";
-}
-if ($bases_graph < $bases_fichier) {
-	echo $bases_graph."<.".$bases_fichier;
-}
-if ($bases_graph > $bases_fichier) {
-	echo $bases_graph.">.".$bases_fichier;
-}
-$total_bases = $vide_graph+$bases_graph;
-echo "end with ".$total_bases." bases.";
-?>
-</body>
+<html><head>	<title>Graph</title>	<style type='text/css'>	#preload-01 { background: url(img/BASE.png) no-repeat -9999px -9999px; }	#preload-02 { background: url(img/VIDE.png) no-repeat -9999px -9999px; }	#preload-03 { background: url(img/PA.png) no-repeat -9999px -9999px; }		.vide {			/*background-image: url(img/VIDE.png);*/			background-color: black;		}		.base {			/*background-image: url(img/BASE.png);*/			background-color: white;		}		div {			width: 3px;			height: 3px;			display: inline-block;		}		td {		    border: 1px solid green; /* auront une bordure de 1px */		}		table {			border-collapse: collapse;		}	</style></head><body onload="afficherBases()"><?php$handle=@fopen("coographfile.txt", "r"); //lecture du fichier$i = 0;if($handle) { //si le fichier existe	while(($buffer=fgets($handle)) != false) { //lecture fichier ligne par ligne		list($pseudo[$i], $x[$i], $y[$i]) = str_replace("\n", "", split("#", $buffer));		$i++;	}	$bases_fichier = $i;}else {	echo "Erreur lors de l'ouverture du fichier";}//GRAPH//1. Dessiner le tableauecho "<table><tr>";$i = 100;$j = 100;while ($j <= 300) {	echo "<td id='x".$i."y".$j."' class='vide'>";	echo "</td>";	$i++;	if ($i>300) {		$i = 100;		$j++;		echo "</tr><tr>";	}}echo "</table>";echo "<script type='text/javascript'>\nfunction afficherBases1() {\n";$i = 0;$n = 1;foreach ($x as $xi => $xf) {	echo "var cell".($xi-($n-1)*60)." = document.getElementById('x".$xf."y".$y[$xi]."');\n";	echo "cell".($xi-($n-1)*60).".className = 'base';\n";	$i++;	if ($i > 60) {		$n++;		echo"}\n</script>\n<script type='text/javascript'>\nfunction afficherBases".$n."() {";		$i=0;	}}echo "}\n</script>";?><script type="text/javascript">	function afficherBases() {		afficherBases1();		afficherBases2();		afficherBases3();		afficherBases4();		afficherBases5();		afficherBases6();		afficherBases7();		afficherBases8();		afficherBases9();		afficherBases10();		var i;	var tds = document.getElementsByTagName("td")	for(i=0; i<tds.length;++i) {		tds[i].onmouseover = afficherInfos(this)	}	}	function afficherInfos(td) {		var coo = td.id.replace("x", "").split("y")		var x = coo[0]		var y = coo[1]		var infos = document.getElementById("infos")		var pseudoInfos = document.getElementById("pseudo")		var xInfos = document.getElementById("x")		var yInfos = document.getElementById("y")		xInfos.innerHTML = x;		yInfos.innerHTML = y;	}</script><div id="infos">	<ul>		<li id="pseudo"></li>		<li id="x"></li>		<li id="y"></li>	</ul></div></body>
