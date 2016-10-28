@@ -1,2 +1,10 @@
-NEWS 28/11/14!
-Le projet prend beaucoup d'avance ! mais un problème de scan a été révélé, je travaille en duo avex Foohx pour que le projet soit encore mieux ! ;) Il a d'ailleurs développé une extension nommée "bandit" disponible sur le chrome store ! ;)
+3gm est un jeu de stratégie online disponible ici ->>> http://www.3gm.fr/
+Ce projet consiste à créer plusieurs bots qui réaliseront automatiquement certaines tâches dans le jeu, à partir d'une console ruby. (crawler)
+Projet mené en coopération avec pyerre.
+MODE D'EMPLOI
+Nécéssite:
+	- Ruby
+	- Nokogiri
+	- Mechanize
+Pour la première utilisation, il faut créer un fichier ids.txt
+Choisir un fichier (dans cet exemple, "autonomate.rb")
